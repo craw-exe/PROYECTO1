@@ -2,7 +2,7 @@
 $host = "localhost";
 $usuario = "root";      
 $clave = "";            
-$bd = "xteam_games";
+$bd = "xteam_games_new";
 
 $conexion = new mysqli($host, $usuario, $clave, $bd);
 
@@ -10,5 +10,5 @@ $conexion = new mysqli($host, $usuario, $clave, $bd);
 if ($conexion->connect_error) {
     die("Error en la conexión: " . $conexion->connect_error);
 } else {
-    echo "Conexión exitosa a la base de datos";
+    //echo "Conexión exitosa a la base de datos";
 }

@@ -8,12 +8,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $confirm_password = $_POST["confirm_password"];
 
     if (empty($nombre_usuario) || empty($email) || empty($contraseña) || empty($confirm_password)) {
-        echo "⚠️ Todos los campos son obligatorios. <a href='register.html'>Volver</a>";
+        echo "Todos los campos son obligatorios. <a href='register.html'>Volver</a>";
         exit;
     }
 
     if ($contraseña !== $confirm_password) {
-        echo "❌ Las contraseñas no coinciden. <a href='register.html'>Volver</a>";
+        echo "Las contraseñas no coinciden. <a href='register.html'>Volver</a>";
         exit;
     }
 

@@ -37,21 +37,21 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
             // Redirección según el tipo de usuario
             if ($tipo_usuario === 'admin') {
-                header("Location: admin.html");
+                header("Location: admin.php ");
             } elseif ($tipo_usuario === 'cliente') {
-                header("Location: cliente.php");
+                header("Location: index.php");
             } elseif ($tipo_usuario === 'desarrollador') {
                 header("Location: desarrollador.html");
             } else {
-                echo "⚠️ Tipo de usuario desconocido.";
+                echo "Tipo de usuario desconocido.";
             }
 
             exit; // Importante para detener la ejecución
         } else {
-            echo "❌ Contraseña incorrecta. <a href='login.html'>Intentar de nuevo</a>";
+            echo "Contraseña incorrecta. <a href='login.html'>Intentar de nuevo</a>";
         }
     } else {
-        echo "⚠️ Usuario no encontrado. <a href='login.html'>Intentar de nuevo</a>";
+        echo "Usuario no encontrado. <a href='login.html'>Intentar de nuevo</a>";
     }
 
     $stmt->close();
