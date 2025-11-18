@@ -10,8 +10,6 @@ $juegos = $conexion->query("
     ORDER BY id_videojuego ASC
 ");
 
-$hola;
-
 // ======= CONSULTA OFERTA: solo Left 4 Dead 2 =======
 $oferta = $conexion->query("
     SELECT id_videojuego, titulo, precio, url_imagen, desarrollador, calificacion_promedio 
