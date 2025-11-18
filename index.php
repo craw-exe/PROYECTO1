@@ -32,6 +32,12 @@ function limpiarRutaImagen($ruta) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Xteam - Tu tienda de videojuegos</title>
     <link rel="stylesheet" href="style.css">
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+
 </head>
 <body>
     <!-- ======= NAVBAR ======= -->
@@ -64,32 +70,36 @@ function limpiarRutaImagen($ruta) {
         <section class="featured-games">
             <h2>Juegos Destacados</h2>
             <div class="game-grid">
-                <?php if ($juegos && $juegos->num_rows > 0): ?>
-                    <?php while($juego = $juegos->fetch_assoc()): 
-                        $imagen = limpiarRutaImagen($juego['url_imagen']);
-                    ?>
-                        <div class="game-card">
-                            <a href="detalleJuego.php?id=<?php echo $juego['id_videojuego']; ?>">
-                                <img src="<?php echo htmlspecialchars($imagen); ?>" alt="Portada del juego">
-                                <h3><?php echo htmlspecialchars($juego['titulo']); ?></h3>
-                                <p class="price">$<?php echo number_format($juego['precio'], 2); ?></p>
-                                <?php if (!empty($juego['calificacion_promedio'])): ?>
-                                    <p class="rating">⭐ <?php echo number_format($juego['calificacion_promedio'], 1); ?>/5</p>
-                                <?php endif; ?>
-                            </a>
+                <div class="slider">
+                    <?php if ($juegos && $juegos->num_rows > 0): ?>
+                        <?php while($juego = $juegos->fetch_assoc()): 
+                            $imagen = limpiarRutaImagen($juego['url_imagen']);
+                        ?>
+                        
+                            <div class="game-card">
+                                <a href="detalleJuego.php?id=<?php echo $juego['id_videojuego']; ?>">
+                                    <img src="<?php echo htmlspecialchars($imagen); ?>" alt="Portada del juego">
+                                    <h3><?php echo htmlspecialchars($juego['titulo']); ?></h3>
+                                    <p class="price">$<?php echo number_format($juego['precio'], 2); ?></p>
+                                    <?php if (!empty($juego['calificacion_promedio'])): ?>
+                                        <p class="rating">⭐ <?php echo number_format($juego['calificacion_promedio'], 1); ?>/5</p>
+                                    <?php endif; ?>
+                                </a>
 
-                            <form action="agregarCarrito.php" method="POST">
-                                <input type="hidden" name="id" value="<?php echo $juego['id_videojuego']; ?>">
-                                <input type="hidden" name="titulo" value="<?php echo htmlspecialchars($juego['titulo']); ?>">
-                                <input type="hidden" name="precio" value="<?php echo $juego['precio']; ?>">
-                                <input type="hidden" name="imagen" value="<?php echo htmlspecialchars($imagen); ?>">
-                                <button type="submit" class="btn-agregar-carrito">Agregar al Carrito</button>
-                            </form>
-                        </div>
-                    <?php endwhile; ?>
-                <?php else: ?>
-                    <p>No hay videojuegos disponibles en este momento.</p>
-                <?php endif; ?>
+                                <form action="agregarCarrito.php" method="POST">
+                                    <input type="hidden" name="id" value="<?php echo $juego['id_videojuego']; ?>">
+                                    <input type="hidden" name="titulo" value="<?php echo htmlspecialchars($juego['titulo']); ?>">
+                                    <input type="hidden" name="precio" value="<?php echo $juego['precio']; ?>">
+                                    <input type="hidden" name="imagen" value="<?php echo htmlspecialchars($imagen); ?>">
+                                    <button type="submit" class="btn-agregar-carrito">Agregar al Carrito</button>
+                                </form>
+                            </div>
+                        
+                        <?php endwhile; ?>
+                    <?php else: ?>
+                        <p>No hay videojuegos disponibles en este momento.</p>
+                    <?php endif; ?>
+                </div>
             </div>
         </section>
 
@@ -125,6 +135,21 @@ function limpiarRutaImagen($ruta) {
             <?php endif; ?>
         </section>
     </main>
+
+    <script>
+        $(document).ready(function(){
+            $('.slider').slick({
+                autoplay: true,
+                autoplaySpeed: 3000,
+                dots: false,
+                arrows: true,
+                infinite: true,
+                speed: 500,
+                slidesToShow: 4,
+                slidesToScroll: 1
+            });
+        });
+    </script>
 
     <!-- ======= FOOTER ======= -->
     <footer>

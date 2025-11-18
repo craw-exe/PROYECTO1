@@ -2,7 +2,7 @@
 $host = "localhost";
 $usuario = "root";      
 $clave = "";            
-$bd = "xteam_games_new";
+$bd = "xteam_games";
 
 $conexion = new mysqli($host, $usuario, $clave, $bd);
 
