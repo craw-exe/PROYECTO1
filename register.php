@@ -49,7 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     window.location.href='login.html';
                 </script>";
     } else {
-        echo "❌ Error al registrar: " . $stmt->error;
+        echo "Error al registrar: " . $stmt->error;
     }
 
     $stmt->close();

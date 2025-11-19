@@ -125,8 +125,8 @@ $compras = $conexion->query("
                                     <td>$<?= number_format($v['precio'], 2) ?></td>
                                     <td><?= $v['fecha_lanzamiento'] ?></td>
                                     <td>
-                                        <a href="editar_videojuego.php?id=<?= $v['id_videojuego'] ?>">✏</a>
-                                        <a href="eliminar_videojuego.php?id=<?= $v['id_videojuego'] ?>" onclick="return confirm('¿Eliminar este videojuego?');">🗑</a>
+                                        <a href="editar_juego.php?id=<?= $v['id_videojuego'] ?>">Editar</a>
+                                        <a href="eliminar_juego.php?id=<?= $v['id_videojuego'] ?>" onclick="return confirm('¿Eliminar este videojuego?');">Eliminar</a>
                                     </td>
                                 </tr>
                             <?php endwhile; ?>

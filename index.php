@@ -49,7 +49,7 @@ function limpiarRutaImagen($ruta) {
                 <li><a href="biblioteca.php">Biblioteca</a></li>
                 <li><a href="carrito.php">Carrito</a></li>
                 <li><a href="reviews.html">Reseñas</a></li>
-                <li><a href="nosotros.php">Acerca de</a></li>
+                <li><a href="nosotros.html">Acerca de</a></li>
             </ul>
 
             <div class="nav-actions">
