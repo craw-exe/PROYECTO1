@@ -23,6 +23,12 @@
                 return false;
             }
 
+            var RegExCorreo=/^[^@\s]+@[^@\.\s]+(\.[^@\.\s]+)+$/;        
+            if (!(RegExCorreo.test(correo))) {
+                alert('Dirección de correo electrónico inválido.');
+                return false;
+            }
+
             if (pass !== confirm) {
                 alert("Las contraseñas no coinciden");
                 event.preventDefault();
