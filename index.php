@@ -48,7 +48,7 @@ function limpiarRutaImagen($ruta) {
                 <li><a href="index.php">Tienda</a></li>
                 <li><a href="biblioteca.php">Biblioteca</a></li>
                 <li><a href="carrito.php">Carrito</a></li>
-                <li><a href="reviews.php">Reseñas</a></li>
+                <li><a href="reviews.html">Reseñas</a></li>
                 <li><a href="nosotros.php">Acerca de</a></li>
             </ul>
 

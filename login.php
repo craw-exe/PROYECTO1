@@ -46,12 +46,18 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 echo "Tipo de usuario desconocido.";
             }
 
-            exit; // Importante para detener la ejecución
+            exit;
         } else {
-            echo "Contraseña incorrecta. <a href='login.html'>Intentar de nuevo</a>";
+            echo"<script>
+                    alert('Contraseña incorrecta'); 
+                    window.location.href='login.html';
+                </script>";
         }
     } else {
-        echo "Usuario no encontrado. <a href='login.html'>Intentar de nuevo</a>";
+        echo"<script>
+                    alert('Usuario no existe'); 
+                    window.location.href='login.html';
+                </script>";
     }
 
     $stmt->close();
