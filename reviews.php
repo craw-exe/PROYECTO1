@@ -46,9 +46,6 @@ function limpiarRutaImagen($ruta) {
                     <li><a href="admin.php">Panel de Administrador</a></li>
                 <?php endif; ?>
             </ul>
-            <div class="nav-actions">
-                <a href="login.html" class="login-btn">Iniciar Sesión</a>
-            </div>
         </nav>
     </header>
 

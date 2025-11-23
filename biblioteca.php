@@ -76,9 +76,6 @@ function limpiarRutaImagen($ruta) {
                     <li><a href="admin.php">Panel de Administrador</a></li>
                 <?php endif; ?>
         </ul>
-        <div class="nav-actions">
-                <a href="login.html" class="login-btn">Iniciar Sesión</a>
-            </div>
     </nav>
 </header>
 
@@ -115,8 +112,8 @@ function limpiarRutaImagen($ruta) {
                                 <p><?php echo htmlspecialchars(substr($juego['descripcion'], 0, 150) . '...'); ?></p>
                             </div>
                             <div class="juego-acciones">
-                                <a href="jugar.php?id=<?php echo $juego['id_videojuego']; ?>" class="btn-jugar">🎮 Jugar</a>
-                                <a href="detalleJuego.php?id=<?php echo $juego['id_videojuego']; ?>" class="btn-ver-detalles">📖 Ver Detalles</a>
+                                <a href="jugar.php?id=<?php echo $juego['id_videojuego']; ?>" class="btn-jugar">Jugar</a>
+                                <a href="detalleJuego.php?id=<?php echo $juego['id_videojuego']; ?>" class="btn-ver-detalles">Ver Detalles</a>
                             </div>
                         </div>
                     </div>

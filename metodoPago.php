@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-$baseUrl = 'http://localhost/PROYECTO1'; // Ajusta a tu URL base
+$baseUrl = 'http://localhost/PW/PROYECTO1'; // Ajusta a tu URL base
 
 // Verificar si es una compra directa (datos POST)
 $carrito = [];

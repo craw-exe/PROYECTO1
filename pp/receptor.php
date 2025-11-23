@@ -3,7 +3,7 @@ session_start();
 require_once '../fpdf186/fpdf.php';
 include '../conexion.php';
 
-$baseUrl = 'http://localhost/PROYECTO1/index.php';
+$baseUrl = 'http://localhost/PW/PROYECTO1';
 $paypal_hostname = 'www.sandbox.paypal.com';
 $pdt_identity_token = '5y8MgjHyQOvmdSyKOSg46ha4LPKDKfRoxnlnzBEUMBL63I8PQzAmAily1_e';
 
@@ -68,15 +68,45 @@ if (strcmp($lines[0], "SUCCESS") == 0) {
             $_SESSION['usuario_invitado'] = $id_usuario;
         }
 
-        // Tomar items del carrito o compra directa
+        // Tomar items del carrito de la sesión si existen. Si no, reconstruir desde los parámetros PDT/IPN de PayPal.
         $carrito = $_SESSION['carrito'] ?? [];
-        if (empty($carrito) && isset($keyarray['item_name1'])) {
-            $carrito[] = [
-                'id' => $keyarray['item_number1'] ?? 0,
-                'titulo' => $keyarray['item_name1'] ?? '',
-                'precio' => $keyarray['mc_gross'] ?? 0,
-                'cantidad' => $keyarray['quantity1'] ?? 1
+
+        // Helper para intentar varias formas de nombrado que PayPal puede devolver
+        function payKey(array $arr, string $base, int $i) {
+            $candidates = [
+                "{$base}_{$i}", // e.g. item_name_1
+                "{$base}{$i}",  // e.g. item_name1
+                "{$base}{$i}",  // redundant but safe
             ];
+            foreach ($candidates as $k) {
+                if (isset($arr[$k])) return $arr[$k];
+            }
+            return null;
+        }
+
+        if (empty($carrito)) {
+            // Si PayPal devolvió items como parte del pago, reconstruir el carrito
+            $i = 1;
+            while (true) {
+                $nombre = payKey($keyarray, 'item_name', $i);
+                if ($nombre === null) break; // no hay más items
+
+                $id_item = payKey($keyarray, 'item_number', $i) ?? payKey($keyarray, 'item_number_', $i) ?? 0;
+                $cantidad = payKey($keyarray, 'quantity', $i) ?? payKey($keyarray, 'quantity_', $i) ?? 1;
+                $precio_item = payKey($keyarray, 'amount', $i) ?? payKey($keyarray, 'amount_', $i) ?? null;
+
+                // Si no se tiene un precio por item, usar el mc_gross total dividido por la cantidad total (fallback)
+                if ($precio_item === null) $precio_item = $keyarray['mc_gross'] ?? 0;
+
+                $carrito[] = [
+                    'id' => intval($id_item),
+                    'titulo' => $nombre,
+                    'precio' => floatval($precio_item),
+                    'cantidad' => intval($cantidad)
+                ];
+
+                $i++;
+            }
         }
 
         // Insertar Compra
@@ -101,7 +131,7 @@ if (strcmp($lines[0], "SUCCESS") == 0) {
         $stmt_detalle->close();
         $stmt_biblio->close();
 
-        // Generar PDF
+        // Insertos hechos: Compra, DetalleCompra y Biblioteca. Ahora generar PDF
         class PDF extends FPDF {
             function Header() {
                 $logoPath = __DIR__ . '/../img/logo.png';
@@ -142,10 +172,20 @@ if (strcmp($lines[0], "SUCCESS") == 0) {
         $stmt_recibo->execute();
         $stmt_recibo->close();
 
-        // Abrir PDF
-        header('Content-Type: application/pdf');
-        header("Content-Disposition: inline; filename=comprobante_{$id_compra}.pdf");
-        readfile($filename);
+        // Registrar el recibo (guardar binario). Si falla, dejar registro en error_log
+        $stmt_recibo = $conexion->prepare("INSERT INTO Recibo (id_compra, nombre_archivo, contenido) VALUES (?, ?, ?)");
+        $pdf_content = file_get_contents($filename);
+        if ($pdf_content === false) {
+            error_log("No se pudo leer el contenido del PDF para la compra {$id_compra}");
+        } else {
+            $stmt_recibo->bind_param("iss", $id_compra, $filename, $pdf_content);
+            if (!$stmt_recibo->execute()) {
+                error_log("Error al insertar recibo: " . $stmt_recibo->error);
+            }
+            $stmt_recibo->close();
+        }
+
+        // Redirigir al usuario a la biblioteca (PDF guardado en servidor en /comprobantes/)
         header('Location: ../biblioteca.php');
         exit;
 
