@@ -3,61 +3,102 @@ include("conexion.php");
 $id = $_GET['id'];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
-    $titulo = $_POST['titulo'];
-    $descripcion = $_POST['descripcion'];
-    $fecha_lanzamiento = $_POST['fecha_lanzamiento'];
-    $precio = $_POST['precio'];
-    $url_imagen = $_POST['url_imagen'];
-    $id_desarrollador = $_POST['id_desarrollador'];
-    $requisitos_minimos = $_POST['requisitos_minimos'];
-    $requisitos_recomendados = $_POST['requisitos_recomendados'];
-    $plataforma = $_POST['plataforma'];
-    $idiomas = $_POST['idiomas'];
-
-    $stmt = $conexion->prepare("DELETE videojuego WHERE id_videojuego=?");
+    $stmt = $conexion->prepare("DELETE FROM videojuego WHERE id_videojuego=?"); 
     $stmt->bind_param("i", $id);
     $stmt->execute();
 
-    if ($stmt->affected_rows > 0) {
-        echo"<script>
-                    alert('Videojuego eliminado correctamente');
-                    window.location.href='register.html';
-                </script>";
-    } else {
-        echo"<script>
-                    alert('No se encontró el Videojuego');
-                    window.location.href='register.html';
-                </script>";
-    }
-
-    header("Location: admin.php#usuarios");
+    header("Location: admin.php#videojuegos");
     exit;
 }
 
 $datos = $conexion->query("SELECT * FROM videojuego WHERE id_videojuego=$id")->fetch_assoc();
 ?>
-<form method="POST">
-    <h2>Editar Videojuego</h2>
-    <label>Titulo: <?= $datos['titulo'] ?></label><br>
-        <br><br>
-    <label>Descripcion: <?= $datos['descripcion'] ?></label><br>
-        <br><br>
-    <label>Fecha de lanzamiento: <?= $datos['fecha_lanzamiento'] ?></label><br>
-        <br><br>
-    <label>Precio: <?= $datos['precio'] ?></label><br>
-        <br><br>
-    <label>URL de la imagen: <?= $datos['url_imagen'] ?></label><br>
-        <br><br>
-    <label>Id del desarrollador: <?= $datos['id_desarrollador'] ?></label><br>
-        <br><br>
-    <label>Requisitos minimos: <?= $datos['requisitos_minimos'] ?></label><br>
-        <br><br>
-    <label>Requisitos recomendados: <?= $datos['requisitos_recomendados'] ?></label><br>
-        <br><br>
-    <label>Plataforma: <?= $datos['plataforma'] ?></label><br>
-        <br><br>
-    <label>Idiomas: <?= $datos['idiomas'] ?></label><br>
-        <br><br>
-    <button type="submit">Eliminar</button>
-</form>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css"> 
+    <title>Eliminar Videojuego</title>
+</head>
+<body>
+    <div class="admin-container">
+        <div class="admin-section">
+            
+            <h2 style="color: #ff6b6b;">Confirmar Eliminación de Videojuego</h2>
+
+            <div class="form-container">
+                <form method="POST">
+                    
+                    <div style="text-align: center; color: white; margin-bottom: 25px;">
+                        Estás a punto de eliminar el siguiente videojuego. 
+                        <br>
+                        <span style="color: #ff1500;">Esta acción es irreversible. ¿Deseas continuar?.</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Título:</label>
+                        <p class="data-display"><?= $datos['titulo'] ?></p>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Descripción:</label>
+                        <p class="data-display"><?= $datos['descripcion'] ?></p>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Fecha de lanzamiento:</label>
+                        <p class="data-display"><?= $datos['fecha_lanzamiento'] ?></p>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Precio:</label>
+                        <p class="data-display"><?= $datos['precio'] ?></p>
+                    </div>
+
+                    <div class="form-group">
+                        <label>URL de la imagen:</label>
+                        <p class="data-display"><?= $datos['url_imagen'] ?></p>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>ID del desarrollador:</label>
+                        <p class="data-display"><?= $datos['id_desarrollador'] ?></p>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Requisitos mínimos:</label>
+                        <p class="data-display"><?= $datos['requisitos_minimos'] ?></p>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Requisitos recomendados:</label>
+                        <p class="data-display"><?= $datos['requisitos_recomendados'] ?></p>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Plataforma:</label>
+                        <p class="data-display"><?= $datos['plataforma'] ?></p>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Idiomas:</label>
+                        <p class="data-display"><?= $datos['idiomas'] ?></p>
+                    </div>
+                    
+                    <div class="form-actions" style="margin-top: 30px;">
+                        <button type="submit" class="btn-delete">Eliminar</button>
+                        <button type="button" class="btn-secondary" onclick="cancelar();">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function cancelar() {
+            window.location.href = "admin.php#videojuegos";
+        } 
+    </script>
+</body>
+</html>

@@ -1,3 +1,29 @@
+<?php
+session_start();
+include 'conexion.php';
+
+// Determinar ID de usuario
+if (isset($_SESSION['usuario'])) {
+    $nombre_usuario = $_SESSION['usuario'];
+    $stmt_usr = $conexion->prepare("SELECT id_usuario FROM Usuario WHERE nombre_usuario = ?");
+    $stmt_usr->bind_param("s", $nombre_usuario);
+    $stmt_usr->execute();
+    $res = $stmt_usr->get_result();
+    $usuario_data = $res->fetch_assoc();
+    $id_usuario = $usuario_data['id_usuario'];
+    $stmt_usr->close();
+} elseif (isset($_SESSION['usuario_invitado'])) {
+    $id_usuario = $_SESSION['usuario_invitado'];
+} else {
+    $id_usuario = null; // Ningún usuario aún
+}
+
+function limpiarRutaImagen($ruta) {
+    $ruta = str_replace(['../', 'C:\\xampp\\htdocs\\PROYECTO1\\'], '', $ruta);
+    $ruta = str_replace('\\', '/', $ruta);
+    return $ruta;
+}
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -12,10 +38,13 @@
             <a href="index.php" class="logo">Xteam</a>
             <ul class="nav-links">
                 <li><a href="index.php">Tienda</a></li>
-                <li><a href="biblioteca.html">Biblioteca</a></li>
+                <li><a href="biblioteca.php">Biblioteca</a></li>
                 <li><a href="carrito.php">Carrito </a></li>
-                <li><a href="reviews.html">Reseñas</a></li>
-                <li><a href="nosotros.html">Acerca de</a></li>
+                <li><a href="reviews.php">Reseñas</a></li>
+                <li><a href="nosotros.php">Acerca de</a></li>
+                <?php if (isset($_SESSION['tipo_usuario']) && $_SESSION['tipo_usuario'] == 'admin'): ?>
+                    <li><a href="admin.php">Panel de Administrador</a></li>
+                <?php endif; ?>
             </ul>
             <div class="nav-actions">
                 <a href="login.html" class="login-btn">Iniciar Sesión</a>

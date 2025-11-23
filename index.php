@@ -48,8 +48,11 @@ function limpiarRutaImagen($ruta) {
                 <li><a href="index.php">Tienda</a></li>
                 <li><a href="biblioteca.php">Biblioteca</a></li>
                 <li><a href="carrito.php">Carrito</a></li>
-                <li><a href="reviews.html">Reseñas</a></li>
-                <li><a href="nosotros.html">Acerca de</a></li>
+                <li><a href="reviews.php">Reseñas</a></li>
+                <li><a href="nosotros.php">Acerca de</a></li>
+                <?php if (isset($_SESSION['tipo_usuario']) && $_SESSION['tipo_usuario'] == 'admin'): ?>
+                    <li><a href="admin.php">Panel de Administrador</a></li>
+                <?php endif; ?>
             </ul>
 
             <div class="nav-actions">
@@ -75,7 +78,6 @@ function limpiarRutaImagen($ruta) {
                         <?php while($juego = $juegos->fetch_assoc()): 
                             $imagen = limpiarRutaImagen($juego['url_imagen']);
                         ?>
-                        
                             <div class="game-card">
                                 <a href="detalleJuego.php?id=<?php echo $juego['id_videojuego']; ?>">
                                     <img src="<?php echo htmlspecialchars($imagen); ?>" alt="Portada del juego">
@@ -94,7 +96,6 @@ function limpiarRutaImagen($ruta) {
                                     <button type="submit" class="btn-agregar-carrito">Agregar al Carrito</button>
                                 </form>
                             </div>
-                        
                         <?php endwhile; ?>
                     <?php else: ?>
                         <p>No hay videojuegos disponibles en este momento.</p>

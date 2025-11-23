@@ -3,7 +3,7 @@ session_start();
 require_once '../fpdf186/fpdf.php';
 include '../conexion.php';
 
-$baseUrl = 'http://localhost/PROYECTO1';
+$baseUrl = 'http://localhost/PROYECTO1/index.php';
 $paypal_hostname = 'www.sandbox.paypal.com';
 $pdt_identity_token = '5y8MgjHyQOvmdSyKOSg46ha4LPKDKfRoxnlnzBEUMBL63I8PQzAmAily1_e';
 

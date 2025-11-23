@@ -67,7 +67,6 @@ body {
     text-decoration: none;
     font-weight: bold;
 }
-
                                                                 /* Página Principal */
 .featured-games h2, .special-offers h2 {
     color: #66c0f4;
@@ -715,12 +714,6 @@ footer a{
     box-sizing: border-box;
 }
 
-body {
-    font-family: 'Arial', sans-serif;
-    background-color: #1b2838;
-    color: #c7d5e0;
-}
-
 .admin-container {
     max-width: 1400px;
     margin: 0 auto;
@@ -898,14 +891,23 @@ tr:hover {
     color: #fff;
 }
 
-.form-group {
-    margin-bottom: 20px;
+.form-container { 
+    background-color: #171a21;
+    padding: 30px;
+    border-radius: 8px;
+    max-width: 600px;
+    margin: 20px auto;
 }
 
 .form-group label {
     display: block;
-    margin-bottom: 5px;
+    margin-bottom: 8px;
     color: #c7d5e0;
+    font-weight: bold;
+}
+
+.form-group {
+    margin-bottom: 20px;
 }
 
 .form-group input,
@@ -922,6 +924,7 @@ tr:hover {
     display: flex;
     gap: 10px;
     justify-content: flex-end;
+    margin-top: 30px;
 }
 
 .btn-secondary {
@@ -938,6 +941,55 @@ tr:hover {
 .btn-secondary:hover {
     background-color: #66c0f4;
     color: #171a21;
+}
+
+.btn-delete {
+    background-color: #ff6b6b; /* Rojo fuerte */
+    color: #ffffff;
+    border: 2px solid #000000;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s;
+}
+
+.btn-delete:hover {
+    background-color: #e55c5c; 
+}
+
+.data-display {
+    /* Imitar el estilo de un input deshabilitado */
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #3a3f4b;
+    border-radius: 4px;
+    background-color: #171a21; /* Fondo del campo de entrada */
+    color: #c7d5e0;
+    box-sizing: border-box;
+    margin-top: 5px; /* Pequeño espacio debajo del label */
+    word-wrap: break-word; /* Para URLs o textos largos */
+}
+
+/* inputs, selects y textareas */
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="password"],
+.form-group input[type="number"],
+.form-group input[type="date"],
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #3a3f4b;
+    border-radius: 4px;
+    background-color: #171a21;
+    color: #c7d5e0;
+    box-sizing: border-box;
+}
+
+.form-group textarea {
+    resize: vertical;
 }
 
 @media (max-width: 768px) {

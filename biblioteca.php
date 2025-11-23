@@ -72,16 +72,13 @@ function limpiarRutaImagen($ruta) {
             <li><a href="carrito.php">Carrito</a></li>
             <li><a href="reviews.php">Reseñas</a></li>
             <li><a href="nosotros.php">Acerca de</a></li>
+            <?php if (isset($_SESSION['tipo_usuario']) && $_SESSION['tipo_usuario'] == 'admin'): ?>
+                    <li><a href="admin.php">Panel de Administrador</a></li>
+                <?php endif; ?>
         </ul>
         <div class="nav-actions">
-            <?php if (isset($_SESSION['usuario'])): ?>
-                <p style="color: #c7d5e0; margin: 0;">Hola, <b><?php echo htmlspecialchars($_SESSION['usuario']); ?></b></p>
-                <a href="logout.php" class="login-btn">Cerrar sesión</a>
-            <?php else: ?>
-                <a href="login.html" class="login-btn">Iniciar sesión</a>
-                <a href="registro.html" class="btn-register">Registrarse</a>
-            <?php endif; ?>
-        </div>
+                <a href="login.html" class="login-btn">Iniciar Sesión</a>
+            </div>
     </nav>
 </header>
 

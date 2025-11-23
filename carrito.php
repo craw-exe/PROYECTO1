@@ -24,9 +24,13 @@ $total = $subtotal - $descuentos;
             <a href="index.php" class="logo">Xteam</a>
             <ul class="nav-links">
                 <li><a href="index.php">Tienda</a></li>
-                <li><a href="biblioteca.html">Biblioteca</a></li>
-                <li><a href="reviews.html">Reseñas</a></li>
-                <li><a href="nosotros.html">Acerca de</a></li>
+                <li><a href="biblioteca.php">Biblioteca</a></li>
+                <li><a href="carrito.php">Carrito</a></li>
+                <li><a href="reviews.php">Reseñas</a></li>
+                <li><a href="nosotros.php">Acerca de</a></li>
+                <?php if (isset($_SESSION['tipo_usuario']) && $_SESSION['tipo_usuario'] == 'admin'): ?>
+                    <li><a href="admin.php">Panel de Administrador</a></li>
+                <?php endif; ?>
             </ul>
         </nav>
     </header>

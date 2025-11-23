@@ -51,6 +51,7 @@ $compras = $conexion->query("
                 <a href="#usuarios">Usuarios</a>
                 <a href="#videojuegos">Videojuegos</a>
                 <a href="#compras">Compras</a>
+                <a href="index.php">Ver Tienda</a>
                 <a href="logout.php">Cerrar Sesión</a>
             </div>
         </header>
@@ -73,6 +74,12 @@ $compras = $conexion->query("
             <section id="usuarios" class="admin-section">
                 <h2>Usuarios Registrados</h2>
                 <div class="table-container">
+                    <div style="margin-bottom: 15px;">
+                        <a href="insertar_usuario.php" 
+                        style="display:inline-block; padding:8px 15px; background:#007bff; color:white; text-decoration:none; border-radius:5px;">
+                        Nuevo Usuario
+                        </a>
+                    </div>
                     <table>
                         <thead>
                             <tr>
@@ -93,7 +100,7 @@ $compras = $conexion->query("
                                     <td><?= $u['fecha_registro'] ?></td>
                                     <td>
                                         <a href="editar_usuario.php?id=<?= $u['id_usuario'] ?>">Editar</a>
-                                        <a href="eliminar_usuario.php?id=<?= $u['id_usuario'] ?>" onclick="return confirm('¿Eliminar este usuario?');">Eliminar</a>
+                                        <a href="eliminar_usuario.php?id=<?= $u['id_usuario'] ?>">Eliminar</a>
                                     </td>
                                 </tr>
                             <?php endwhile; ?>
@@ -106,6 +113,12 @@ $compras = $conexion->query("
             <section id="videojuegos" class="admin-section">
                 <h2>Videojuegos Registrados</h2>
                 <div class="table-container">
+                    <div style="margin-bottom: 15px;">
+                        <a href="insertar_juego.php" 
+                        style="display:inline-block; padding:8px 15px; background:#28a745; color:white; text-decoration:none; border-radius:5px; margin-right:10px;">
+                        Nuevo Juego
+                        </a>
+                    </div>
                     <table>
                         <thead>
                             <tr>
@@ -126,7 +139,7 @@ $compras = $conexion->query("
                                     <td><?= $v['fecha_lanzamiento'] ?></td>
                                     <td>
                                         <a href="editar_juego.php?id=<?= $v['id_videojuego'] ?>">Editar</a>
-                                        <a href="eliminar_juego.php?id=<?= $v['id_videojuego'] ?>" onclick="return confirm('¿Eliminar este videojuego?');">Eliminar</a>
+                                        <a href="eliminar_juego.php?id=<?= $v['id_videojuego'] ?>">Eliminar</a>
                                     </td>
                                 </tr>
                             <?php endwhile; ?>
