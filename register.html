@@ -6,9 +6,10 @@
     <title>Registro - Xteam</title>
     <link rel="stylesheet" href="style.css">
     <script>
+        // Validación de registro: obtiene valores del DOM (usuario, email, contraseña)
         function validarRegistro(event) {
             var usuario = document.getElementById("username").value.trim();
-            var correo = document.getElementsByName("email")[0].value;
+            var correo = document.getElementById("email").value.trim();
 
             const pass = document.getElementById("password").value;
             const confirm = document.getElementById("confirm-password").value;
@@ -18,7 +19,7 @@
                 return false;
             }
 
-            if (contraseña === "") {
+            if (pass === "") {
                 alert("Debes ingresar tu contraseña.");
                 return false;
             }

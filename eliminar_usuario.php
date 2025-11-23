@@ -76,6 +76,7 @@ $usuario = $conexion->query("SELECT * FROM Usuario WHERE id_usuario=$id")->fetch
     </div>
 
     <script>
+        // Navegación: cancelar vuelve al panel de usuarios
         function cancelar() {
             window.location.href = "admin.php#usuarios";
         } 

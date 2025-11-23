@@ -89,9 +89,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
 
         <script>
+            // Navegación: redirige al panel de administración cuando el usuario cancela
             function cancelar() {
                 window.location.href = "admin.php#usuarios"; 
             } 
+            // Validación de form: obtiene valores desde el DOM (inputs) y valida antes de enviar
             function validarRegistro(event) {
                 const nombreUsuario = document.getElementById("nombre_usuario").value.trim();
                 const correo = document.getElementById("email").value.trim();

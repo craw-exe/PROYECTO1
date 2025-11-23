@@ -131,10 +131,12 @@ $datos = $conexion->query("SELECT * FROM videojuego WHERE id_videojuego=$id")->f
     </div>
 
     <script>
+        // Navegación: vuelve al listado de videojuegos en el panel si se cancela la edición
         function cancelar() {
             window.location.href = "admin.php#videojuegos";
         } 
         
+        // Validación de edición: obtiene valores del DOM y valida campos requeridos y formato
         function validarJuegoEdicion(event) {
             function getFieldName(id) {
                 const elemento = document.getElementById(id);

@@ -2,7 +2,6 @@
 session_start();
 include 'conexion.php';
 
-// ======= CONSULTA PRINCIPAL: todos los juegos menos el de oferta =======
 $juegos = $conexion->query("
     SELECT id_videojuego, titulo, precio, url_imagen, desarrollador, calificacion_promedio 
     FROM vw_catalogo_videojuegos 
@@ -10,7 +9,6 @@ $juegos = $conexion->query("
     ORDER BY id_videojuego ASC
 ");
 
-// ======= CONSULTA OFERTA: solo Left 4 Dead 2 =======
 $oferta = $conexion->query("
     SELECT id_videojuego, titulo, precio, url_imagen, desarrollador, calificacion_promedio 
     FROM vw_catalogo_videojuegos 
@@ -18,7 +16,7 @@ $oferta = $conexion->query("
     LIMIT 1
 ");
 
-// ======= FUNCIÓN para limpiar rutas =======
+//limpiar rutas
 function limpiarRutaImagen($ruta) {
     $ruta = str_replace(['../', 'C:\\xampp\\htdocs\\PROYECTO1\\'], '', $ruta);
     $ruta = str_replace('\\', '/', $ruta); // estandariza separadores
@@ -38,9 +36,23 @@ function limpiarRutaImagen($ruta) {
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 
+    <script>
+        // Inicializa Slick Carousel: usa jQuery para seleccionar el slider e inicializar el plugin en el DOM
+        $(document).ready(function(){
+            $('.slider').slick({
+                autoplay: true,
+                autoplaySpeed: 3000,
+                dots: false,
+                arrows: true,
+                infinite: true,
+                speed: 500,
+                slidesToShow: 4,
+                slidesToScroll: 1
+            });
+        });
+    </script>
 </head>
 <body>
-    <!-- ======= NAVBAR ======= -->
     <header>
         <nav class="navbar">
             <a href="index.php" class="logo">Xteam</a>
@@ -61,15 +73,12 @@ function limpiarRutaImagen($ruta) {
                     <a href="logout.php" class="login-btn">Cerrar sesión</a>
                 <?php else: ?>
                     <a href="login.html" class="login-btn">Iniciar sesión</a>
-                    <!-- <a href="registro.html" class="btn-register">Registrarse</a> -->
                 <?php endif; ?>
             </div>
         </nav>
     </header>
 
-    <!-- ======= CONTENIDO PRINCIPAL ======= -->
     <main class="container">
-        <!-- JUEGOS DESTACADOS -->
         <section class="featured-games">
             <h2>Juegos Destacados</h2>
             <div class="game-grid">
@@ -83,9 +92,6 @@ function limpiarRutaImagen($ruta) {
                                     <img src="<?php echo htmlspecialchars($imagen); ?>" alt="Portada del juego">
                                     <h3><?php echo htmlspecialchars($juego['titulo']); ?></h3>
                                     <p class="price">$<?php echo number_format($juego['precio'], 2); ?></p>
-                                    <?php if (!empty($juego['calificacion_promedio'])): ?>
-                                        <p class="rating">⭐ <?php echo number_format($juego['calificacion_promedio'], 1); ?>/5</p>
-                                    <?php endif; ?>
                                 </a>
 
                                 <form action="agregarCarrito.php" method="POST">
@@ -104,7 +110,6 @@ function limpiarRutaImagen($ruta) {
             </div>
         </section>
 
-        <!-- SECCIÓN DE OFERTAS -->
         <section class="special-offers">
             <h2>Ofertas Especiales</h2>
             <?php if ($oferta && $oferta->num_rows > 0): ?>
@@ -137,22 +142,6 @@ function limpiarRutaImagen($ruta) {
         </section>
     </main>
 
-    <script>
-        $(document).ready(function(){
-            $('.slider').slick({
-                autoplay: true,
-                autoplaySpeed: 3000,
-                dots: false,
-                arrows: true,
-                infinite: true,
-                speed: 500,
-                slidesToShow: 4,
-                slidesToScroll: 1
-            });
-        });
-    </script>
-
-    <!-- ======= FOOTER ======= -->
     <footer>
         <a href="nosotros.php#contacto">Contáctanos</a><br><br>
         <p>&copy; 2025 Xteam. Todos los derechos reservados.</p>

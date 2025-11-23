@@ -72,10 +72,12 @@ $usuario = $conexion->query("SELECT * FROM Usuario WHERE id_usuario=$id")->fetch
     </div>
 
     <script>
+        // Navegación: vuelve al panel de usuarios si se cancela la edición
         function cancelar() {
             window.location.href = "admin.php#usuarios";
         } 
         
+        // Validación de edición: lee inputs del DOM, valida formato (email) y redirige post-POST
         function validarUsuarioEdicion(event) {
             // Función auxiliar para obtener el nombre del campo a partir del ID
             function getFieldName(id) {

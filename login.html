@@ -32,17 +32,18 @@
         </div>
 
         <script>
+            // Validación de login: obtiene usuario y contraseña desde el DOM antes de enviar
             function validarLogin() {
 
                 var usuario = document.getElementById("username").value.trim();
-                var contraseña = document.getElementsByName("contraseña")[0].value;
+                var contrasena = document.getElementById("password").value;
 
                 if (usuario === "") {
                     alert("Debes ingresar un nombre de usuario.");
                     return false;
                 }
 
-                if (contraseña === "") {
+                if (contrasena === "") {
                     alert("Debes ingresar tu contraseña.");
                     return false;
                 }   

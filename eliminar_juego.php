@@ -96,6 +96,7 @@ $datos = $conexion->query("SELECT * FROM videojuego WHERE id_videojuego=$id")->f
     </div>
 
     <script>
+        // Navegación: cancelar vuelve al panel de videojuegos (no hace modificaciones en el DOM)
         function cancelar() {
             window.location.href = "admin.php#videojuegos";
         } 

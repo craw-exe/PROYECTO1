@@ -113,10 +113,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
 
         <script>
+            // Navegación: redirige al listado de videojuegos en el panel admin
             function cancelar() {
                 window.location.href = "admin.php#videojuegos";
             } 
             
+            // Validación de formulario: lee campos del DOM, valida vacíos y formato (precio)
             function validarJuego(event) {
                 // Función auxiliar para obtener el nombre del campo a partir del ID
                 function getFieldName(id) {
