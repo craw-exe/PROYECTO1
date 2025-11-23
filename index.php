@@ -30,7 +30,7 @@ function limpiarRutaImagen($ruta) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Xteam - Tu tienda de videojuegos</title>
     <link rel="stylesheet" href="style.css">
-
+    <link rel="shortcut icon" type="image/png" href="imgs/logo.png?v=2">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

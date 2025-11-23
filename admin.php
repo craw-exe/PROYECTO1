@@ -41,6 +41,7 @@ $compras = $conexion->query("
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel de Administración - Xteam</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" type="image/png" href="imgs/logo.png?v=2">
 </head>
 <body>
     <div class="admin-container">

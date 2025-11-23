@@ -42,6 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <head>
         <title>Registrar Usuario</title>
         <link rel="stylesheet" href="style.css">
+        <link rel="shortcut icon" type="image/png" href="imgs/logo.png?v=2">
     </head>
     <body>
         <div class="admin-container">

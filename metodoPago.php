@@ -78,6 +78,7 @@ if (isset($_POST['procesar_pago'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Método de Pago - Xteam</title>
     <link rel="stylesheet" href="stylePago.css">
+    <link rel="shortcut icon" type="image/png" href="imgs/logo.png?v=2">
 </head>
 <body>
     <header>
