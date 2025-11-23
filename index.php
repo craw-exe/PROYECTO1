@@ -18,7 +18,7 @@ $oferta = $conexion->query("
 
 //limpiar rutas
 function limpiarRutaImagen($ruta) {
-    $ruta = str_replace(['../', 'C:\\xampp\\htdocs\\PROYECTO1\\'], '', $ruta);
+    $ruta = str_replace(['../', 'C:\\xampp\\htdocs\\PW\\PROYECTO1\\'], '', $ruta);
     $ruta = str_replace('\\', '/', $ruta); // estandariza separadores
     return $ruta;
 }
