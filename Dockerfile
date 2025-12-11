@@ -1,4 +1,4 @@
-# Imagen oficial de PHP con servidor embebido
+# Imagen oficial de PHP con server embebido
 FROM php:8.2-cli
 
 # Copiar archivos del proyecto al container
