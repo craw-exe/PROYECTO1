@@ -5,7 +5,7 @@ FROM php:8.2-cli
 WORKDIR /app
 COPY . /app
 
-# Exponer el puerto que Render usa
+# Exponer el puerto que usa Render
 EXPOSE 10000
 
 # Comando que ejecuta PHP
