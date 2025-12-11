@@ -1,7 +1,7 @@
 # Imagen oficial de PHP con servidor embebido
 FROM php:8.2-cli
 
-# Copiar archivos del proyecto al contenedor
+# Copiar archivos del proyecto al container
 WORKDIR /app
 COPY . /app
 
